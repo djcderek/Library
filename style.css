@@ -1,0 +1,21 @@
+body {
+margin: 0;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+.card {
+    width: 280px;
+    height: 280px;
+    background-color: black;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
