@@ -31,10 +31,21 @@ function displayLibrary(myLibrary) {
     }
 }
 
+function displayForm() {
+    
+}
+
+const button = document.querySelector('button')
+button.addEventListener('click', () => {
+    myLibrary.push(new Book('a', 'b', 10, true))
+    container.innerHTML = ''
+    displayLibrary(myLibrary)
+})
+
 let book1 = new Book('a', 'b', 5, true)
 let book2 = new Book('c', 'd', 6, true)
 
-addBookToLibrary(book1)
-addBookToLibrary(book2)
+//addBookToLibrary(book1)
+//addBookToLibrary(book2)
 
-displayLibrary(myLibrary)
+//displayLibrary(myLibrary)
