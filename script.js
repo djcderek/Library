@@ -31,21 +31,26 @@ function displayLibrary(myLibrary) {
     }
 }
 
-function displayForm() {
-    
-}
+let form = document.querySelector('form')
+const newBook = document.querySelector('.newBook')
+newBook.addEventListener('click', () => {
+    form.classList.toggle('invisible')
+})
 
-const button = document.querySelector('button')
-button.addEventListener('click', () => {
-    myLibrary.push(new Book('a', 'b', 10, true))
+function addBook() {
+    let book = document.querySelector('#book').value
+    let author = document.querySelector('#author').value
+    let pages = document.querySelector('#pages').value
+    let read = document.querySelector('#read').value
+    let tempBook = new Book(book, author, pages, read)
+
+    addBookToLibrary(tempBook)
     container.innerHTML = ''
     displayLibrary(myLibrary)
-})
+    event.preventDefault()
+}
 
 let book1 = new Book('a', 'b', 5, true)
 let book2 = new Book('c', 'd', 6, true)
 
-//addBookToLibrary(book1)
-//addBookToLibrary(book2)
-
-//displayLibrary(myLibrary)
+displayLibrary(myLibrary)
