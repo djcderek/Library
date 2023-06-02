@@ -10,13 +10,13 @@
     <body>
         <form class="invisible">
             <label for="book">Book:</label><br>
-            <input type="text" id="book" name="book"><br>
+            <input type="text" id="book" name="book" required/><br>
             <label for="author">Author:</label><br>
-            <input type="text" id="author" name="author"><br>
+            <input type="text" id="author" name="author" required/><br>
             <label for="pages">Pages:</label><br>
-            <input type="text" id="pages" name="pages"><br>
+            <input type="number" id="pages" name="pages" required/><br>
             <label for="read">Read:</label><br>
-            <input type="text" name="read" id="read"><br>
+            <input type="checkbox" name="read" id="read"/><br>
             <input type="submit" value="Submit" onclick="addBook()">
         </form>
         <div class="container" id="main"></div>

@@ -18,7 +18,7 @@ function displayCard(book) {
         let tempDiv = document.createElement('div')
         tempDiv.textContent = book[key]
         tempDiv.style.color = 'white'
-        console.log(key)
+        //console.log(key)
         card.appendChild(tempDiv)
     }
     card.classList.add('card')
@@ -35,22 +35,23 @@ let form = document.querySelector('form')
 const newBook = document.querySelector('.newBook')
 newBook.addEventListener('click', () => {
     form.classList.toggle('invisible')
+    form.reset()
 })
 
 function addBook() {
     let book = document.querySelector('#book').value
     let author = document.querySelector('#author').value
     let pages = document.querySelector('#pages').value
-    let read = document.querySelector('#read').value
+    let read = document.querySelector('#read').checked
     let tempBook = new Book(book, author, pages, read)
 
-    addBookToLibrary(tempBook)
-    container.innerHTML = ''
-    displayLibrary(myLibrary)
-    event.preventDefault()
+    if (form.checkValidity()) {
+        addBookToLibrary(tempBook)
+        container.innerHTML = ''
+        displayLibrary(myLibrary)
+        form.classList.toggle('invisible')
+        event.preventDefault()
+    }
 }
-
-let book1 = new Book('a', 'b', 5, true)
-let book2 = new Book('c', 'd', 6, true)
 
 displayLibrary(myLibrary)
