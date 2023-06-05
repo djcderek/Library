@@ -18,29 +18,38 @@ function addBookToLibrary(book) {
 function displayCard(book, index) {
     const card = document.createElement('div')
     book.index = index
+
     for (key in book) {
+        if (key === 'read') {
+            break
+        }
         let tempDiv = document.createElement('div')
         tempDiv.textContent = book[key]
         tempDiv.style.color = 'white'
         //console.log(key)
         card.appendChild(tempDiv)
     }
+    const readBtn = document.createElement('button')
+    book.read ? readBtn.textContent = 'Read' : readBtn.textContent = 'Not read'
+    readBtn.addEventListener('click', () => {
+        readStatus = book.read
+        book.read = !readStatus
+        book.read ? readBtn.textContent = 'Read' : readBtn.textContent = 'Not read'
+    })
+
+    card.appendChild(readBtn)
+
     const removeBtn = document.createElement('button')
     removeBtn.textContent = 'Remove'
     removeBtn.dataset.index = book.index
     removeBtn.addEventListener('click', () => {
         myLibrary.splice(removeBtn.dataset.index, 1)
-
-        //container.innerHTML = ''
         displayLibrary(myLibrary)
-        //console.log(myLibrary)
-        //console.log(removeBtn.dataset.index)
     })
 
     card.appendChild(removeBtn)
     card.classList.add('card')
     card.dataset.index = book.index
-    //console.log(card.dataset.index)
     container.appendChild(card)
 }
 
@@ -65,10 +74,8 @@ function addBook() {
 
     let tempBook = new Book(book, author, pages, read, index)
 
-    //console.log(myLibrary.length)
     if (form.checkValidity()) {
         addBookToLibrary(tempBook)
-        //container.innerHTML = ''
         displayLibrary(myLibrary)
         form.classList.toggle('invisible')
         event.preventDefault()
