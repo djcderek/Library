@@ -1,10 +1,11 @@
 let myLibrary = []
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, index) {
     this.title = title
     this.author = author
     this.pages = pages
     this.read = read
+    this.index = index
 }
 
 function addBookToLibrary(book) {
@@ -12,6 +13,7 @@ function addBookToLibrary(book) {
 }
 
 const container = document.querySelector('.container')
+
 function displayCard(book) {
     const card = document.createElement('div')
     for (key in book) {
@@ -21,7 +23,12 @@ function displayCard(book) {
         //console.log(key)
         card.appendChild(tempDiv)
     }
+    const removeBtn = document.createElement('button')
+    removeBtn.textContent = 'Remove'
+    card.appendChild(removeBtn)
     card.classList.add('card')
+    card.dataset.index = book.index
+    //console.log(card.dataset.index)
     container.appendChild(card)
 }
 
@@ -33,6 +40,7 @@ function displayLibrary(myLibrary) {
 
 let form = document.querySelector('form')
 const newBook = document.querySelector('.newBook')
+
 newBook.addEventListener('click', () => {
     form.classList.toggle('invisible')
     form.reset()
@@ -43,8 +51,11 @@ function addBook() {
     let author = document.querySelector('#author').value
     let pages = document.querySelector('#pages').value
     let read = document.querySelector('#read').checked
-    let tempBook = new Book(book, author, pages, read)
+    let index = myLibrary.length
 
+    let tempBook = new Book(book, author, pages, read, index)
+
+    //console.log(myLibrary.length)
     if (form.checkValidity()) {
         addBookToLibrary(tempBook)
         container.innerHTML = ''
