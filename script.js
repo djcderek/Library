@@ -1,4 +1,7 @@
 let myLibrary = []
+const container = document.querySelector('.container')
+let form = document.querySelector('form')
+const newBook = document.querySelector('.newBook')
 
 function Book(title, author, pages, read, index) {
     this.title = title
@@ -12,10 +15,9 @@ function addBookToLibrary(book) {
     myLibrary.push(book)
 }
 
-const container = document.querySelector('.container')
-
-function displayCard(book) {
+function displayCard(book, index) {
     const card = document.createElement('div')
+    book.index = index
     for (key in book) {
         let tempDiv = document.createElement('div')
         tempDiv.textContent = book[key]
@@ -25,6 +27,16 @@ function displayCard(book) {
     }
     const removeBtn = document.createElement('button')
     removeBtn.textContent = 'Remove'
+    removeBtn.dataset.index = book.index
+    removeBtn.addEventListener('click', () => {
+        myLibrary.splice(removeBtn.dataset.index, 1)
+
+        //container.innerHTML = ''
+        displayLibrary(myLibrary)
+        //console.log(myLibrary)
+        //console.log(removeBtn.dataset.index)
+    })
+
     card.appendChild(removeBtn)
     card.classList.add('card')
     card.dataset.index = book.index
@@ -33,13 +45,11 @@ function displayCard(book) {
 }
 
 function displayLibrary(myLibrary) {
+    container.innerHTML = ''
     for (let i = 0; i < myLibrary.length; i++) {
-        displayCard(myLibrary[i])
+        displayCard(myLibrary[i], i)
     }
 }
-
-let form = document.querySelector('form')
-const newBook = document.querySelector('.newBook')
 
 newBook.addEventListener('click', () => {
     form.classList.toggle('invisible')
@@ -58,7 +68,7 @@ function addBook() {
     //console.log(myLibrary.length)
     if (form.checkValidity()) {
         addBookToLibrary(tempBook)
-        container.innerHTML = ''
+        //container.innerHTML = ''
         displayLibrary(myLibrary)
         form.classList.toggle('invisible')
         event.preventDefault()
