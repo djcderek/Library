@@ -22,14 +22,18 @@
         </div>
 
         <form class="invisible">
-            <label for="book">Book:</label><br>
-            <input type="text" id="book" name="book" required/><br>
-            <label for="author">Author:</label><br>
-            <input type="text" id="author" name="author" required/><br>
-            <label for="pages">Pages:</label><br>
-            <input type="number" id="pages" name="pages" required/><br>
-            <label for="read">Read:</label><br>
-            <input type="checkbox" name="read" id="read"/><br>
+            <div>Add new book</div>
+            <label for="book"></label><br>
+            <input type="text" id="book" name="book" placeholder="Title..." required/><br>
+            <label for="author"></label><br>
+            <input type="text" id="author" name="author" placeholder="Author..." required/><br>
+            <label for="pages"></label><br>
+            <input type="number" id="pages" name="pages" placeholder="Pages..." required/><br>
+            <div class="read-checkbox">
+                <div>Read:</div>
+                <label for="read"></label>
+                <input type="checkbox" name="read" id="read"/><br>
+            </div>
             <input type="submit" value="Submit" onclick="addBook()">
         </form>
 
