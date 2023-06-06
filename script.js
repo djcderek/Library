@@ -60,7 +60,10 @@ function displayLibrary(myLibrary) {
     }
 }
 
+mainBody = document.querySelector('.main-body')
+
 newBook.addEventListener('click', () => {
+    mainBody.classList.toggle('blur')
     form.classList.toggle('invisible')
     form.reset()
 })
@@ -78,10 +81,9 @@ function addBook() {
         addBookToLibrary(tempBook)
         displayLibrary(myLibrary)
         form.classList.toggle('invisible')
+        mainBody.classList.toggle('blur')
         event.preventDefault()
     }
 }
-
-displayLibrary(myLibrary)
 
 //fix negative number page input

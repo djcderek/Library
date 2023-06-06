@@ -5,9 +5,14 @@ body {
 button {
     height: 100px;
     width: 100px;
+    position: relative;
+    z-index: 2;
+    text-decoration: none;
+    border: none;
 }
 
 form {
+    z-index: 2;
     position: fixed;
     text-align: center;
     width: 300px;
@@ -19,13 +24,45 @@ form {
 
 .main-body {
     display: flex;
+    flex-direction: column;
+}
+
+.blur {
+    filter: blur(3px);
+}
+
+.content {
+    background-color: rgb(226, 226, 226);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} 
+
+.header {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.835);
+    box-shadow: 4px 6px 5px rgb(204, 204, 204);
+    position: relative;
+    z-index: 1;
+}
+
+.name {
+    font-size: xx-large;
+    padding-left: 10px;
 }
 
 .container {
     display: flex;
     height: 100vh;
+    /* width: 100vh; */
+    flex-wrap: wrap;
     display: flex;
     justify-content: space-around;
+    gap: 30px;
 }
 
 .card {
@@ -41,4 +78,9 @@ form {
 
 .invisible {
     display: none;
+}
+
+.newBook {
+    margin-top: 40px;
+    background-color: white;
 }
