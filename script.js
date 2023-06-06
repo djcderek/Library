@@ -27,7 +27,6 @@ function displayCard(book, index) {
         tempDiv.textContent = book[key]
         tempDiv.style.color = 'black'
         tempDiv.style.textAlign = 'center'
-        //console.log(key)
         card.appendChild(tempDiv)
     }
     const readBtn = document.createElement('button')
