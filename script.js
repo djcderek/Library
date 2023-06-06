@@ -25,7 +25,7 @@ function displayCard(book, index) {
         }
         let tempDiv = document.createElement('div')
         tempDiv.textContent = book[key]
-        tempDiv.style.color = 'white'
+        tempDiv.style.color = 'black'
         //console.log(key)
         card.appendChild(tempDiv)
     }
