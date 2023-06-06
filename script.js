@@ -26,6 +26,7 @@ function displayCard(book, index) {
         let tempDiv = document.createElement('div')
         tempDiv.textContent = book[key]
         tempDiv.style.color = 'black'
+        tempDiv.style.textAlign = 'center'
         //console.log(key)
         card.appendChild(tempDiv)
     }
