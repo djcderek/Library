@@ -11,54 +11,64 @@ class Book {
         this.read = read
         this.index = index
     }
-}
 
-function addBookToLibrary(book) {
-    myLibrary.push(book)
-}
-
-function displayCard(book, index) {
-    const card = document.createElement('div')
-    book.index = index
-
-    for (key in book) {
-        if (key === 'read') {
-            break
-        }
-        let tempDiv = document.createElement('div')
-        tempDiv.textContent = book[key]
-        tempDiv.style.color = 'black'
-        tempDiv.style.textAlign = 'center'
-        card.appendChild(tempDiv)
+    addBookToLibrary() {
+        myLibrary.push(this)
     }
-    const readBtn = document.createElement('button')
-    book.read ? readBtn.textContent = 'Read' : readBtn.textContent = 'Not read'
-    readBtn.addEventListener('click', () => {
-        readStatus = book.read
-        book.read = !readStatus
-        book.read ? readBtn.textContent = 'Read' : readBtn.textContent = 'Not read'
-    })
 
-    card.appendChild(readBtn)
+    displayCard(index) {
+        const card = document.createElement('div')
+        this.index = index
+        let properties = Object.getOwnPropertyNames(this)
 
-    const removeBtn = document.createElement('button')
-    removeBtn.textContent = 'Remove'
-    removeBtn.dataset.index = book.index
-    removeBtn.addEventListener('click', () => {
-        myLibrary.splice(removeBtn.dataset.index, 1)
-        displayLibrary(myLibrary)
-    })
+        properties.forEach( key => {
+            if (key === 'read' || key === 'index') {
+            } else {
+                let tempDiv = document.createElement('div')
+                tempDiv.textContent = this[key]
+                tempDiv.style.color = 'black'
+                tempDiv.style.textAlign = 'center'
+                card.appendChild(tempDiv)
+            }
+        })
 
-    card.appendChild(removeBtn)
-    card.classList.add('card')
-    card.dataset.index = book.index
-    container.appendChild(card)
+        const readBtn = document.createElement('button')
+        this.read ? readBtn.textContent = 'Read' : readBtn.textContent = 'Not read'
+        readBtn.addEventListener('click', () => {
+            let readStatus = this.read
+            this.read = !readStatus
+            this.read ? readBtn.textContent = 'Read' : readBtn.textContent = 'Not read'
+        })
+
+        card.appendChild(readBtn)
+        const removeBtn = document.createElement('button')
+        removeBtn.textContent = 'Remove'
+        removeBtn.dataset.index = this.index
+        removeBtn.addEventListener('click', () => {
+            myLibrary.splice(removeBtn.dataset.index, 1)
+            displayLibrary(myLibrary)
+        })
+
+        card.appendChild(removeBtn)
+        card.classList.add('card')
+        card.dataset.index = this.index
+        container.appendChild(card)
+    }
+
+    displayLibrary(myLibrary) {
+        container.innerHTML = ''
+        for (let i = 0; i < myLibrary.length; i++) {
+            displayCard(myLibrary[i], i)
+        }
+    }
 }
 
 function displayLibrary(myLibrary) {
     container.innerHTML = ''
     for (let i = 0; i < myLibrary.length; i++) {
-        displayCard(myLibrary[i], i)
+        console.log(myLibrary[i])
+        myLibrary[i].displayCard(i)
+        //displayCard(myLibrary[i], i)
     }
 }
 
@@ -80,12 +90,12 @@ function addBook() {
     let tempBook = new Book(book, author, pages, read, index)
 
     if (form.checkValidity()) {
-        addBookToLibrary(tempBook)
+        event.preventDefault()
+        tempBook.addBookToLibrary()
         displayLibrary(myLibrary)
         form.classList.toggle('invisible')
         mainBody.classList.toggle('blur')
-        event.preventDefault()
+        //event.preventDefault()
     }
 }
-
 //fix negative number page input
